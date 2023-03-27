@@ -161,12 +161,15 @@ html_theme_options = {
 
 html_title = supported_languages[language] % ( "(" + version + ")" )
 
+branch = os.environ.get("GITHUB_REF_NAME", "master")
+is_master = branch == "master"
+
 # VCS options: https://docs.readthedocs.io/en/latest/vcs.html#github
 html_context = {
     "display_github": not is_i18n,  # Integrate GitHub
     "github_user": "godotengine",  # Username
     "github_repo": "godot-docs",  # Repo name
-    "github_version": os.environ.get("GITHUB_REF_NAME", "master"),  # Version
+    "github_version": branch,  # Version
     "conf_py_path": "/",  # Path in the checkout to the docs root
     "godot_inject_language_links": True,
     "godot_docs_supported_languages": list(supported_languages.keys()),
@@ -180,8 +183,8 @@ html_context = {
     "godot_title_prefix": "" if on_rtd else "(DEV) ",
     # Set this to `True` when in the `latest` branch to clearly indicate to the reader
     # that they are not reading the `stable` documentation.
-    "godot_is_latest": True,
-    "godot_version": "4.0",
+    "godot_is_latest": is_master,
+    "godot_version": "4.0" if is_master else branch,
     # Enables a banner that displays the up-to-date status of each article.
     "godot_show_article_status": True,
 }
