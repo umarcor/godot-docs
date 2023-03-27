@@ -1,10 +1,11 @@
 # Makefile for Sphinx documentation
 
+# HINT: To change the latex paper size, add '-D latex_paper_size=<a4|letter>' to SPHINXOPTS.
+
 SPHINXOPTS      ?=
 SPHINXBUILD     ?= sphinx-build
 SPHINXSOURCEDIR ?= .
 SPHINXBUILDDIR  ?= _build
-SPHINXPAPER     ?=
 FILELIST        ?=
 
 # User-friendly check for sphinx-build
@@ -18,9 +19,7 @@ endef
 $(error ${ERROR_MESSAGE})
 endif
 
-PAPEROPT_a4         = -D latex_paper_size=a4
-PAPEROPT_letter     = -D latex_paper_size=letter
-COMMONSPHINXOPTS    = $(PAPEROPT_$(SPHINXPAPER)) $(SPHINXOPTS) '$(SPHINXSOURCEDIR)'
+COMMONSPHINXOPTS    = $(SPHINXOPTS) '$(SPHINXSOURCEDIR)'
 DEFAULTSPHINXOPTS   = -d $(SPHINXBUILDDIR)/doctrees $(COMMONSPHINXOPTS)
 
 .PHONY: help clean
